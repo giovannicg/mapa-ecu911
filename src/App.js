@@ -1,25 +1,39 @@
-import logo from './logo.svg';
+import { MapContainer,TileLayer,Marker } from "react-leaflet";
+import { Icon } from "leaflet";
 import './App.css';
 
-function App() {
+const icon = new Icon({
+  iconUrl: "/hospital.png",
+  iconSize: [48, 48]
+});
+
+export function App() {
   return (
+    
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <h1> Mapa Zonal Ecu 911</h1>
       </header>
     </div>
   );
 }
 
-export default App;
+export function Mapa(){
+  return(
+    <MapContainer center={[-0.2843216,-78.4569866]} zoom={11}>
+      <TileLayer
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+      />
+      <Marker 
+      position={[-0.0897513,-78.4766635]}
+      icon={icon}
+       />
+       <Marker 
+      position={[-0.167013758396417, -78.47262926797796]}
+      icon={icon}
+       />
+    </MapContainer>
+  );
+}
+
