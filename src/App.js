@@ -1,11 +1,18 @@
 import { MapContainer,TileLayer,Marker } from "react-leaflet";
-import { Icon } from "leaflet";
+import { Icon, marker } from "leaflet";
 import './App.css';
+import {hospitales} from './Hospitales.js'
+import {ambulancias} from './Ambulancias.js'
 
-const icon = new Icon({
+const iconHospital = new Icon({
   iconUrl: "/hospital.png",
   iconSize: [48, 48]
 });
+const iconAmbulance = new Icon({
+  iconUrl: "/ambulancia.png",
+  iconSize: [48, 48]
+});
+
 
 export function App() {
   return (
@@ -25,14 +32,13 @@ export function Mapa(){
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
       />
-      <Marker 
-      position={[-0.0897513,-78.4766635]}
-      icon={icon}
-       />
-       <Marker 
-      position={[-0.167013758396417, -78.47262926797796]}
-      icon={icon}
-       />
+      {hospitales.map((marker) => (
+        <Marker key={marker.id} position={marker.geocode} icon={iconHospital} />
+      ))}
+      {ambulancias.map((marker) => (
+        <Marker key={marker.id} position={marker.geocode} icon={iconAmbulance} />
+      ))}
+
     </MapContainer>
   );
 }
